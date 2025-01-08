@@ -1,0 +1,40 @@
+server:
+  shutdown: graceful
+  port: 8080
+
+spring:
+  application:
+    name: spring-sample
+  lifecycle:
+    timeout-per-shutdown-phase: 1m
+  datasource:
+    url: jdbc:postgresql://localhost:5432/codedoct_spring_sample
+    username: victra
+    password: 
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 7
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 1000
+        order_inserts: true
+        order_updates: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+  endpoint:
+    health:
+      probes:
+        enabled: true
